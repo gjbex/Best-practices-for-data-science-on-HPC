@@ -1,22 +1,15 @@
-# R on HPC Infrastructures
+# Best practices for data science on HPC
 
-This repository collects the training material for the VSC training about using
-R on HPC facilities.
+This repository collects the training materials for the VSC training about using
+HPC infrastructure efficiently for data science.
 
+**Note:** this is work in progress. The training is not yet available.
 
 ## What is it?
 
-1. `docs`: web pages for the training, including the [online
-   slides](https://hpcleuven.github.io/Best-practices-for-R-on-HPC/slides/R_on_HPC.html).
-1. `slides-source/`: source files for the slides.
-1. `projects`: R projects with code examples for the training.
+1. `best_practices_for_data_science_on_hpc.pptx`: Powerpoint slides for the training.
+1. `source-code`: source code for the training.
+1. `docs`: web pages for the training.
 1. `CODE_OF_CONDUCT.md`: code of conduct for the training.
 1. `LICENSE`: license information for the training material.
 1. `CONTRIBUTING.md`: guidelines for contributing to the training material.
-
-
-## Contributors
-
-* [Mariana Montes](mariana.montes@kuleuven.be)
-* [Ehsan Moravveji](ehsan.moravveji@kuleuven.be)
-* [Geert Jan Bex](geertjan.bex@uhasselt.be)

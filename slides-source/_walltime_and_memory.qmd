@@ -185,7 +185,7 @@ Units: `K`, `M`, `G`, `T`
 ## How much memory do you need?
 
 ::: {.incremental}
-- Specify memory (`--mem=30`)
+- Specify memory (`--mem=30G`)
 - But how much?
   - Don't underestimate!
   - Don't (massively) overestimate
