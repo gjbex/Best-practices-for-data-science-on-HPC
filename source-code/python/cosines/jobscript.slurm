@@ -5,4 +5,4 @@
 
 conda activate hpc_intro
 
-python compute.py -n 100 -o result_${SLURM_JOB_ID}.txt -p plot_${SLURM_JOB_ID}.png
+python cosine.py -n 100 -o result_${SLURM_JOB_ID}.txt -p plot_${SLURM_JOB_ID}.png
