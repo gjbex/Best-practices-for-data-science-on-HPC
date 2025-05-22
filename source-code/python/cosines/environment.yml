@@ -1,0 +1,7 @@
+name: hpc_intro
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+prefix: /home/gjb/mambaforge/envs/hpc_intro
