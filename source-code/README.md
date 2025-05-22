@@ -5,4 +5,5 @@ This directory contains the source code of the examples used for this training s
 
 ## What is it?
 
-1 `r-projects/`: various R projects.
+1 `r-projects`: various R projects.
+1. `python`: various Python examples.
