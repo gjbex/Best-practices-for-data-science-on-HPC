@@ -25,6 +25,6 @@ required libraries installed.
 1. `environment.yml`: A YAML file that specifies the Python environment
    dependencies.  You can create the environment using the command above.
 2. `cosine.py`: A Python script that generates a cosine wave plot and saves it
-1. `jobscript.slurm`: A Slurm job script that specifies the resources needed to run the
+1. `cosine.slurm`: A Slurm job script that specifies the resources needed to run the
    Python script.  It includes the job name, output file, and the command to
    run the Python script.
