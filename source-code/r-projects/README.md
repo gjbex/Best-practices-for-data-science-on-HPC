@@ -10,6 +10,8 @@ Example code used in this training.
 1. `dgemm`: matrix-matrix multiplication using a BLAS library.
 1. `julia-set`: Julia set computation parallelized using serveral
    parallelization packages.    
+1. `install_r_packages.slurm`: Slurm job script to install R packages on an
+   HPC system.
 
 
 ## Requirements
