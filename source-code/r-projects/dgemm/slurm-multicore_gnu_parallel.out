@@ -1,0 +1,300 @@
+SLURM_JOB_ID: 62139368
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: multicore_gnu_parallel.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch_sapphirerapids
+SLURM_NNODES: 1
+SLURM_NODELIST: q16c28n4
+SLURM_JOB_CPUS_PER_NODE: 96
+Date: Wed Aug  7 11:10:18 CEST 2024
+Walltime: 00-01:00:00
+========================================================================
+Running with 1 parallel work items
+
+real	0m44.268s
+user	1m21.490s
+sys	0m0.807s
+-----------------------------------
+Running with 2 parallel work items
+
+real	0m53.770s
+user	3m19.952s
+sys	0m5.875s
+-----------------------------------
+Running with 3 parallel work items
+
+real	0m55.465s
+user	4m27.755s
+sys	0m5.567s
+-----------------------------------
+Running with 4 parallel work items
+
+real	0m43.328s
+user	5m28.345s
+sys	0m3.456s
+-----------------------------------
+Running with 5 parallel work items
+
+real	0m57.858s
+user	7m17.033s
+sys	0m8.508s
+-----------------------------------
+Running with 6 parallel work items
+
+real	0m43.947s
+user	8m15.355s
+sys	0m5.395s
+-----------------------------------
+Running with 7 parallel work items
+
+real	0m53.803s
+user	9m57.347s
+sys	0m8.708s
+-----------------------------------
+Running with 8 parallel work items
+
+real	0m51.026s
+user	11m24.923s
+sys	0m13.268s
+-----------------------------------
+Running with 9 parallel work items
+
+real	0m58.392s
+user	12m55.428s
+sys	0m16.256s
+-----------------------------------
+Running with 10 parallel work items
+
+real	0m45.484s
+user	13m54.270s
+sys	0m11.154s
+-----------------------------------
+Running with 11 parallel work items
+
+real	1m3.685s
+user	16m34.028s
+sys	0m29.202s
+-----------------------------------
+Running with 12 parallel work items
+
+real	0m49.853s
+user	17m6.537s
+sys	0m21.628s
+-----------------------------------
+Running with 13 parallel work items
+
+real	1m3.237s
+user	18m57.648s
+sys	0m27.625s
+-----------------------------------
+Running with 14 parallel work items
+
+real	0m49.961s
+user	20m4.821s
+sys	0m27.182s
+-----------------------------------
+Running with 15 parallel work items
+
+real	1m4.509s
+user	23m14.314s
+sys	0m54.015s
+-----------------------------------
+Running with 16 parallel work items
+
+real	0m54.370s
+user	23m31.269s
+sys	0m39.884s
+-----------------------------------
+Running with 17 parallel work items
+
+real	1m0.492s
+user	25m11.955s
+sys	0m42.522s
+-----------------------------------
+Running with 18 parallel work items
+
+real	0m56.757s
+user	26m24.083s
+sys	0m42.929s
+-----------------------------------
+Running with 19 parallel work items
+
+real	1m5.865s
+user	28m19.604s
+sys	0m48.013s
+-----------------------------------
+Running with 20 parallel work items
+
+real	1m0.667s
+user	30m33.785s
+sys	0m51.495s
+-----------------------------------
+Running with 21 parallel work items
+
+real	1m8.166s
+user	32m38.484s
+sys	0m55.825s
+-----------------------------------
+Running with 22 parallel work items
+
+real	0m59.088s
+user	34m53.685s
+sys	1m1.154s
+-----------------------------------
+Running with 23 parallel work items
+
+real	1m8.505s
+user	37m12.959s
+sys	1m11.640s
+-----------------------------------
+Running with 24 parallel work items
+
+real	0m57.741s
+user	39m3.454s
+sys	1m5.239s
+-----------------------------------
+Running with 25 parallel work items
+
+real	1m8.524s
+user	41m43.429s
+sys	1m15.617s
+-----------------------------------
+Running with 26 parallel work items
+
+real	1m2.970s
+user	43m37.331s
+sys	1m13.657s
+-----------------------------------
+Running with 27 parallel work items
+
+real	1m13.163s
+user	47m4.903s
+sys	1m37.206s
+-----------------------------------
+Running with 28 parallel work items
+
+real	1m13.889s
+user	49m19.780s
+sys	1m39.457s
+-----------------------------------
+Running with 29 parallel work items
+
+real	1m15.954s
+user	52m9.415s
+sys	1m46.913s
+-----------------------------------
+Running with 30 parallel work items
+
+real	1m18.581s
+user	54m47.103s
+sys	1m53.488s
+-----------------------------------
+Running with 31 parallel work items
+
+real	1m6.889s
+user	56m10.485s
+sys	1m39.902s
+-----------------------------------
+Running with 32 parallel work items
+
+real	1m18.399s
+user	59m27.428s
+sys	1m53.432s
+-----------------------------------
+Running with 33 parallel work items
+
+real	1m11.830s
+user	62m21.185s
+sys	2m2.577s
+-----------------------------------
+Running with 34 parallel work items
+
+real	1m14.313s
+user	65m19.097s
+sys	2m6.292s
+-----------------------------------
+Running with 35 parallel work items
+
+real	1m20.015s
+user	68m40.959s
+sys	2m12.791s
+-----------------------------------
+Running with 36 parallel work items
+
+real	1m12.722s
+user	71m22.780s
+sys	2m18.274s
+-----------------------------------
+Running with 37 parallel work items
+
+real	1m17.905s
+user	74m33.645s
+sys	2m24.946s
+-----------------------------------
+Running with 38 parallel work items
+
+real	1m16.812s
+user	77m30.223s
+sys	2m26.614s
+-----------------------------------
+Running with 39 parallel work items
+
+real	1m25.029s
+user	80m41.857s
+sys	2m35.776s
+-----------------------------------
+Running with 40 parallel work items
+
+real	1m21.203s
+user	83m21.119s
+sys	2m44.657s
+-----------------------------------
+Running with 41 parallel work items
+
+real	1m26.950s
+user	87m53.672s
+sys	3m15.495s
+-----------------------------------
+Running with 42 parallel work items
+
+real	1m22.936s
+user	90m47.870s
+sys	3m15.108s
+-----------------------------------
+Running with 43 parallel work items
+
+real	1m30.773s
+user	93m26.784s
+sys	3m14.208s
+-----------------------------------
+Running with 44 parallel work items
+
+real	1m22.619s
+user	96m17.405s
+sys	3m10.527s
+-----------------------------------
+Running with 45 parallel work items
+
+real	1m30.626s
+user	100m20.463s
+sys	3m38.969s
+-----------------------------------
+Running with 46 parallel work items
+
+real	1m22.988s
+user	102m51.387s
+sys	3m35.482s
+-----------------------------------
+Running with 47 parallel work items
+
+real	1m30.182s
+user	107m44.021s
+sys	4m18.189s
+-----------------------------------
+Running with 48 parallel work items
+
+real	1m34.345s
+user	110m15.947s
+sys	4m10.065s
+-----------------------------------

@@ -1,0 +1,20 @@
+SLURM_JOB_ID: 62199209
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: memory_and_walltime.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch_sapphirerapids
+SLURM_NNODES: 1
+SLURM_NODELIST: q16c03n1
+SLURM_JOB_CPUS_PER_NODE: 4
+Date: Tue Aug 13 17:28:05 CEST 2024
+Walltime: 00-01:00:00
+========================================================================
+
+Lmod is automatically replacing "cluster/genius/login" with
+"cluster/wice/batch_sapphirerapids".
+
+SIZE=10000, POWER=40
++ OMP_NUM_THREADS=2
++ ./dgemm.R --size 10000 --power 40 --nr_cores 1
+slurmstepd: error: *** JOB 62199209 ON q16c03n1 CANCELLED AT 2024-08-13T18:28:16 DUE TO TIME LIMIT ***

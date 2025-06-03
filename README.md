@@ -9,6 +9,7 @@ HPC infrastructure efficiently for data science.
 
 1. `best_practices_for_data_science_on_hpc.pptx`: Powerpoint slides for the training.
 1. `source-code`: source code for the training.
+1. `environment.yml`: conda environment file for the training.
 1. `docs`: web pages for the training.
 1. `CODE_OF_CONDUCT.md`: code of conduct for the training.
 1. `LICENSE`: license information for the training material.

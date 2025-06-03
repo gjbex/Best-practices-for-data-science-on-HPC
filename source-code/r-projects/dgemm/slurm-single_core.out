@@ -1,0 +1,27 @@
+SLURM_JOB_ID: 62135521
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: single_core.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch_sapphirerapids
+SLURM_NNODES: 1
+SLURM_NODELIST: q16c03n1
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Mon Aug  5 14:58:01 CEST 2024
+Walltime: 00-00:05:00
+========================================================================
+          Min Diagonal Element Max Diagonal Element
+result.1         -2.657710e+81         2.455079e+81
+result.2         -2.751950e+81         2.274180e+81
+result.3         -3.523732e+81         3.289227e+81
+result.4         -2.330106e+81         2.919354e+81
+result.5         -2.124385e+81         3.159595e+81
+result.6         -2.260128e+81         3.299129e+81
+result.7         -2.153723e+81         3.003021e+81
+result.8         -2.756662e+81         2.444642e+81
+result.9         -3.299568e+81         2.982071e+81
+result.10        -3.168432e+81         2.681552e+81
+
+real	1m58.422s
+user	1m56.016s
+sys	0m1.543s

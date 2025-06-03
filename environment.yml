@@ -1,0 +1,13 @@
+name: best_practices_for_data_science_on_hpc
+channels:
+  - conda-forge
+dependencies:
+  - jupyterlab
+  - py-spy
+  - pandas
+  - seaborn
+  - ca-certificates
+  - certifi
+  - openssl
+  - viztracer
+prefix: /home/gjb/mambaforge/envs/best_practices_for_data_science_on_hpc

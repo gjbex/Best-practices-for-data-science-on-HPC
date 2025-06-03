@@ -1,0 +1,48 @@
+SLURM_JOB_ID: 62142570
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: multicore_omp_trouble.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch_sapphirerapids
+SLURM_NNODES: 1
+SLURM_NODELIST: q16c05n3
+SLURM_JOB_CPUS_PER_NODE: 96
+Date: Thu Aug  8 09:05:48 CEST 2024
+Walltime: 00-01:00:00
+========================================================================
+Running with 1 parallel work items
+
+real	0m14.048s
+user	12m2.057s
+sys	2m53.325s
+-----------------------------------
+Running with 2 parallel work items
+
+real	0m33.564s
+user	27m46.497s
+sys	22m38.291s
+-----------------------------------
+Running with 4 parallel work items
+
+real	1m30.887s
+user	52m36.309s
+sys	89m28.004s
+-----------------------------------
+Running with 8 parallel work items
+
+real	3m4.492s
+user	103m14.674s
+sys	187m4.484s
+-----------------------------------
+Running with 12 parallel work items
+
+real	4m12.496s
+user	154m51.291s
+sys	243m3.602s
+-----------------------------------
+Running with 18 parallel work items
+
+real	5m35.155s
+user	228m40.230s
+sys	301m40.913s
+-----------------------------------

@@ -1,8 +1,0 @@
-# R profiling files
-Rprof.out
-
-# Cache clearing executable
-clear_cache
-
-# output directory
-output/

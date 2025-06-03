@@ -1,0 +1,63 @@
+SLURM_JOB_ID: 62139945
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: multicore_benchmark.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch_sapphirerapids
+SLURM_NNODES: 1
+SLURM_NODELIST: q16c15n1
+SLURM_JOB_CPUS_PER_NODE: 96
+Date: Wed Aug  7 12:15:25 CEST 2024
+Walltime: 00-01:00:00
+========================================================================
++ hyperfine --runs 3 --parameter-list omp_cores 1,2,4,8,12,24,48,72,96 'OMP_NUM_THREADS={omp_cores} ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1'
+Benchmark 1: OMP_NUM_THREADS=1 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     109.453 s ±  0.687 s    [User: 107.974 s, System: 0.563 s]
+  Range (min … max):   108.919 s … 110.228 s    3 runs
+ 
+Benchmark 2: OMP_NUM_THREADS=2 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     64.879 s ±  0.224 s    [User: 110.591 s, System: 0.911 s]
+  Range (min … max):   64.723 s … 65.135 s    3 runs
+ 
+Benchmark 3: OMP_NUM_THREADS=4 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     50.534 s ±  0.933 s    [User: 141.038 s, System: 6.267 s]
+  Range (min … max):   49.848 s … 51.596 s    3 runs
+ 
+Benchmark 4: OMP_NUM_THREADS=8 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     38.413 s ±  1.651 s    [User: 167.962 s, System: 12.186 s]
+  Range (min … max):   36.507 s … 39.393 s    3 runs
+ 
+  Warning: Statistical outliers were detected. Consider re-running this benchmark on a quiet system without any interferences from other programs. It might help to use the '--warmup' or '--prepare' options.
+ 
+Benchmark 5: OMP_NUM_THREADS=12 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     33.700 s ±  0.197 s    [User: 188.884 s, System: 12.708 s]
+  Range (min … max):   33.527 s … 33.915 s    3 runs
+ 
+Benchmark 6: OMP_NUM_THREADS=24 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     31.538 s ±  0.117 s    [User: 293.526 s, System: 35.558 s]
+  Range (min … max):   31.403 s … 31.611 s    3 runs
+ 
+  Warning: Statistical outliers were detected. Consider re-running this benchmark on a quiet system without any interferences from other programs. It might help to use the '--warmup' or '--prepare' options.
+ 
+Benchmark 7: OMP_NUM_THREADS=48 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     31.029 s ±  0.262 s    [User: 525.399 s, System: 94.942 s]
+  Range (min … max):   30.751 s … 31.272 s    3 runs
+ 
+Benchmark 8: OMP_NUM_THREADS=72 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     31.390 s ±  0.380 s    [User: 787.213 s, System: 173.587 s]
+  Range (min … max):   30.979 s … 31.729 s    3 runs
+ 
+Benchmark 9: OMP_NUM_THREADS=96 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+  Time (mean ± σ):     32.989 s ±  1.089 s    [User: 1093.064 s, System: 321.274 s]
+  Range (min … max):   32.239 s … 34.238 s    3 runs
+ 
+Summary
+  OMP_NUM_THREADS=48 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1 ran
+    1.01 ± 0.01 times faster than OMP_NUM_THREADS=72 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    1.02 ± 0.01 times faster than OMP_NUM_THREADS=24 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    1.06 ± 0.04 times faster than OMP_NUM_THREADS=96 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    1.09 ± 0.01 times faster than OMP_NUM_THREADS=12 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    1.24 ± 0.05 times faster than OMP_NUM_THREADS=8 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    1.63 ± 0.03 times faster than OMP_NUM_THREADS=4 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    2.09 ± 0.02 times faster than OMP_NUM_THREADS=2 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
+    3.53 ± 0.04 times faster than OMP_NUM_THREADS=1 ./dgemm.R --nr_matrices 144 --size 2000 --power 5 --nr_cores 1
