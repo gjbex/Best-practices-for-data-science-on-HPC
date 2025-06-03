@@ -3,3 +3,6 @@
 *.bak
 *.swp
 /~$best_practices_for_data_science_on_hpc.pptx
+
+# direnv files
+.envrc
