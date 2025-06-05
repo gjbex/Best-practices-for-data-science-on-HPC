@@ -1,0 +1,11 @@
+name: two_stage_conda
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - scipy
+  - matplotlib
+  - scikit-learn
+  - tensorflow
+  - pytorch
+prefix: /home/gjb/mambaforge/envs/two_stage_conda

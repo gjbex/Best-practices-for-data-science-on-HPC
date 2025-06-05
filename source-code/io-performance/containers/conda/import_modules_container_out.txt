@@ -1,0 +1,18 @@
+SLURM_JOB_ID: 62449606
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: import_modules_container.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: s28c11n2
+SLURM_JOB_CPUS_PER_NODE: 1
+Date: Thu Oct  3 17:05:59 CEST 2024
+Walltime: 00-00:30:00
+========================================================================
+Matplotlib created a temporary config/cache directory at /tmp/matplotlib-ybvryfkf because the default path (/data/leuven/301/vsc30140/.cache/matplotlib) is not a writable directory; it is highly recommended to set the MPLCONFIGDIR environment variable to a writable directory, in particular to speed up the import of Matplotlib and to better support multiprocessing.
+Importing modules is successful.
+
+real	0m7.048s
+user	0m6.042s
+sys	0m0.737s
