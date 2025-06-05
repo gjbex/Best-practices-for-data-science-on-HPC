@@ -1,0 +1,47 @@
+SLURM_JOB_ID: 62446059
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: benchmarks_single_read.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: s28c11n2
+SLURM_JOB_CPUS_PER_NODE: 4
+Date: Wed Oct  2 14:01:51 CEST 2024
+Walltime: 00-12:00:00
+========================================================================
+
+naive method
+Average brightness: 0.65
+
+real	0m13.164s
+user	0m5.570s
+sys	0m3.417s
+
+HDF5 row-major method
+Average brightness: 0.65
+
+real	0m10.648s
+user	0m4.795s
+sys	0m1.880s
+
+HDF5 column-major method
+Average brightness: 0.65
+
+real	29m41.025s
+user	1m23.751s
+sys	26m38.245s
+
+HDF5 stacked method
+Average brightness: 0.65
+
+real	25m6.977s
+user	0m43.234s
+sys	24m3.427s
+
+datasets method
+Average brightness: 0.65
+
+real	0m25.685s
+user	0m36.155s
+sys	0m11.768s

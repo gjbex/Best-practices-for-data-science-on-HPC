@@ -1,0 +1,42 @@
+SLURM_JOB_ID: 62386288
+SLURM_JOB_USER: vsc30140
+SLURM_JOB_ACCOUNT: lpt2_sysadmin
+SLURM_JOB_NAME: benchmarks.slurm
+SLURM_CLUSTER_NAME: wice
+SLURM_JOB_PARTITION: batch
+SLURM_NNODES: 1
+SLURM_NODELIST: n28c32n3
+SLURM_JOB_CPUS_PER_NODE: 4
+Date: Fri Sep 27 16:48:14 CEST 2024
+Walltime: 00-12:00:00
+========================================================================
+naive method
+Total characters read: 102661388
+
+real	1m4.704s
+user	0m4.012s
+sys	0m16.699s
+text index method
+Total characters read: 102494613
+
+real	5m2.753s
+user	3m29.378s
+sys	1m32.338s
+tar method
+Total characters read: 102558235
+
+real	10m4.925s
+user	8m4.759s
+sys	1m58.252s
+zip method
+Total characters read: 102861438
+
+real	1m37.330s
+user	0m7.930s
+sys	1m28.885s
+datasets method
+Total characters read: 102632843
+
+real	0m22.696s
+user	0m14.912s
+sys	0m0.416s

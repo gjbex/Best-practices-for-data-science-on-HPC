@@ -1,0 +1,19 @@
+# data files starting with tmp_
+tmp_*.csv
+tmp_*.parquet
+tmp_*.h5
+tmp_*.txt
+tmp_*.txt.idx
+tmp_*.dat
+tmp_*.zip
+tmp_*.tar
+tmp_*.gz
+
+# data directory
+tmp_*/
+
+# Snakemake directories
+.snakemake/
+
+# Python notebook cache
+__pycache__/
