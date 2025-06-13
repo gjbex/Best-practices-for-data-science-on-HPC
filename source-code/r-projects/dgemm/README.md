@@ -54,6 +54,8 @@ using BLAS, which is parallelized using OpenMP. This script uses a parallel
         `hyperfine` with `cpus_per_task=96`, `OMP_NUM_THREADS` set such that
         when `--nr_cores` varies from 1 to 96, all the cores are used. Output
         is in `slurm-parallel_omp_num_threads_benchmark.out`.
+      - `job_configuration_space.slurm`: runs `dgemm.R` exploring the entire
+        job configuration space.
    1. parallelization (`foreach ... %dopar%`)
       - `parallel_single_core.slurm`: runs `dgemm.R` with `cpus_per_task=4`,
         `OMP_NUM_THREADS=1` and `--nr_cores 4`.  output is in
