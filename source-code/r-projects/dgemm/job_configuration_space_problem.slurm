@@ -12,8 +12,22 @@
 set -e
 
 # load modules
-module purge &> /dev/null
-module load SciPy-bundle/2023.12-iimkl-2023b
+module load R-bundle-CRAN/2023.12-foss-2023a
+
+# define package installation directory and create if necessary
+export R_LIBS_USER="${VSC_DATA}/R/${VSC_OS_LOCAL}/${VSC_ARCH_LOCAL}/${EBVERSIONR}"
+mkdir -p "$R_LIBS_USER"
+
+# set log file for installation
+LOG_FILE="install_${VSC_OS_LOCAL}_${VSC_ARCH_LOCAL}_${EBVERSIONR}.log"
+
+# start R and install packages
+R_LIBS_USER=$R_LIBS_USER R --no-save &> "${LOG_FILE}" <<EOI
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+install.packages("foreach")
+
+EOI
 
 # define the connfiguration space
 max_cpus=96
@@ -28,10 +42,17 @@ power=50
 
 # create a function to run the computation to simplify running GNU parallel
 function run_dgemm {
-    ./dgemm.py --size 2000 --power 20
+    R_LIBS_USER=$R_LIBS_USER R --no-save ./dgemm.R --size $size --power $power --nr_cores 1
 }
 export -f run_dgemm
 
+# switch sandbox off
+# export RENV_CONFIG_SANDBOX_ENABLED=FALSE
+
+# warm up phase
+run_dgemm
+
+# benchmark
 for ntasks in ${ntasks_values[@]}; do
     for cpus_per_task in ${cpus_per_task_values[@]}; do
         if [[ $ntasks*$cpus_per_task -le max_cpus ]]; then
