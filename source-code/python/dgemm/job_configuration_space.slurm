@@ -20,6 +20,7 @@ max_cpus=96
 nr_tasks=$max_cpus
 ntasks_values=(1 2 4 6 8 12 18 24 32 48 60 72 96)
 cpus_per_task_values=(1 2 4 8 12 24 48 96)
+nr_iterations=5
 
 # define task parameters
 size=2000
@@ -27,23 +28,21 @@ power=50
 
 # create a function to run the computation to simplify running GNU parallel
 function run_dgemm {
-    python dgemm.py --size $size --power $power
+    ./dgemm.py --size 2000 --power 20
 }
 export -f run_dgemm
 
-for ntasks in ${ntasks_values[@]}
-do
-    for cpus_per_task in ${cpus_per_task_values[@]}
-    do
-    if [[ $ntasks*$cpus_per_task -le max_cpus ]]
-    then
-        export OMP_NUM_THREADS=$cpus_per_task
-        export RENV_CONFIG_SANDBOX_ENABLED=FALSE
-        start_time=$(date +%s.%N)
-        parallel -j $ntasks run_dgemm ::: $(seq $ntasks) > /dev/null
-        end_time=$(date +%s.%N)
-        elapsed_time=$(bc -q <<< "$end_time - $start_time")
-        echo "$ntasks,$cpus_per_task,$elapsed_time"
-    fi
+for ntasks in ${ntasks_values[@]}; do
+    for cpus_per_task in ${cpus_per_task_values[@]}; do
+        if [[ $ntasks*$cpus_per_task -le max_cpus ]]; then
+            for iteration in $(seq $nr_iterations); do
+                export OMP_NUM_THREADS=$cpus_per_task
+                start_time=$(date +%s.%N)
+                parallel -j $ntasks run_dgemm ::: $(seq $ntasks) > /dev/null
+                end_time=$(date +%s.%N)
+                elapsed_time=$(bc -q <<< "$end_time - $start_time")
+                echo "$ntasks,$cpus_per_task,$elapsed_time"
+            done
+        fi
     done
 done
