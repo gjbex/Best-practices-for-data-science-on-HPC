@@ -3,7 +3,6 @@
 This repository collects the training materials for the VSC training about using
 HPC infrastructure efficiently for data science.
 
-**Note:** this is work in progress. The training is not yet available.
 
 ## What is it?
 
