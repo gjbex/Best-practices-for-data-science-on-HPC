@@ -1,0 +1,141 @@
+#!/usr/bin/env bash
+
+# @describe Easily manage file-as-filesystem tool
+# 
+# It can be used to create, mount and unmount a file as
+# a file system
+
+# function to check whether its argument is a valid size, it writes a message
+# to stderr and exits with a non-zero status if the size is invalid
+is_valid_size() {
+    if ! numfmt --from=iec "$1" &>/dev/null; then
+        echo "Invalid size: $1" >&2
+        exit 1
+    fi
+}
+
+# function to check whether its argument is a valid block size, it writes a message
+# to stderr and exits with a non-zero status if the block size is invalid, it also
+# checks if the block size is a multiple of 512 bytes, and is less than or equal to 1M
+is_valid_block_size() {
+    if ! numfmt --from=iec "$1" &>/dev/null; then
+        echo "Invalid block size: $1" >&2
+        exit 1
+    fi
+    local block_size_bytes=$(numfmt --from=iec "$1")
+    if (( block_size_bytes % 512 != 0 || block_size_bytes > 1048576 )); then
+        echo "Block size must be a multiple of 512 bytes and less than or equal to 1M" >&2
+        exit 1
+    fi
+}
+
+# function to check whether the specified file system type is supported, it writes a message
+# to stderr and exits with a non-zero status if the file system type is not supported
+is_valid_fs_type() {
+    local fs_type="$1"
+    if ! command -v mkfs.$fs_type &>/dev/null; then
+        echo "Unsupported file system type: $fs_type" >&2
+        exit 1
+    fi
+}
+
+# function to check whether the image file already exists, if so, write a message
+# to stderr and exit with a non-zero status
+is_image_file_exists() {
+    if [[ -f "$1" ]]; then
+        echo "File $1 already exists. Please remove it before running the script." >&2
+        exit 2
+    fi
+}
+
+# function to compute the number of blocks needed for the file system image
+calculate_blocks() {
+    local size_in_bytes=$(numfmt --from=iec "$1")
+    local block_size_in_bytes=$(numfmt --from=iec "$2")
+    echo $((size_in_bytes / block_size_in_bytes))
+}
+
+# @cmd Create a file system image
+# @arg image_file!                           Name of the image file to use
+# @arg size!                                 Size of the file system, units are M, G
+# @option -b --block_size=4K                 Block size of the file system, units are K, M
+# @option -t --fs_type[=ext4|ext3|ext2]      Type of the file system
+# @flag -f --force                           Force creation of the file system image, even if it already exists
+create() {
+    is_valid_size "$argc_size"
+    is_valid_block_size "$argc_block_size"
+    is_valid_fs_type "$argc_fs_type"
+    if [[ -z "$argc_force" ]]; then
+        is_image_file_exists "$argc_image_file"
+    fi
+    local nr_blocks=$(calculate_blocks "$argc_size" "$argc_block_size")
+    dd status=none if=/dev/zero of=$argc_image_file bs=$argc_block_size count=$nr_blocks
+    mkfs.$argc_fs_type -q -b $(numfmt --from=iec $argc_block_size) $argc_image_file
+}
+
+# function to verify whether the mount point is valid, i.e.,
+#  - it exists
+#  - it is a directory
+#  - it is empty
+#  - it is not mounted
+is_valid_mount_point() {
+    if [[ ! -d "$1" ]]; then
+        echo "Mount point $1 does not exist." >&2
+        exit 3
+    fi
+    if [[ -n "$(/usr/bin/mount | grep "$1")" ]]; then
+        echo "Mount point $1 is already mounted." >&2
+        exit 3
+    fi
+    if [[ -n "$(ls -A "$1")" ]]; then
+        echo "Mount point $1 is not empty." >&2
+        exit 3
+    fi
+}
+
+# @cmd Mount a file system image
+# @arg image_file!                           Name of the image file to use
+# @arg mount_point!                          Mount point for the file system image
+# @flag -r --read_only                       Mount the file system image as read-only
+mount() {
+    argc_mount_point="${argc_mount_point%/}"
+    # if image file doesn't exists, write a message to stderr and exit with a non-zero status
+    if [[ ! -f "$argc_image_file" ]]; then
+        echo "Image file $argc_image_file does not exist." >&2
+        exit 1
+    fi
+    # if mount point does not exists, create it.
+    if [[ ! -d "$argc_mount_point" ]]; then
+        mkdir -p "$argc_mount_point"
+        # if this fails, write a message to stderr and exit with a non-zero status
+        if [[ $? -ne 0 ]]; then
+            echo "Failed to create mount point $argc_mount_point." >&2
+            exit 3
+        fi
+    fi
+    is_valid_mount_point "$argc_mount_point"
+    if [[ -n "$argc_read_only" ]]; then
+        fuse2fs -o ro "$argc_image_file" "$argc_mount_point"
+    else
+        fuse2fs -o fakeroot "$argc_image_file" "$argc_mount_point"
+    fi
+}
+
+# @cmd Unmount a file system image
+# @arg mount_point!                          Mount point for the file system image
+unmount() {
+    argc_mount_point="${argc_mount_point%/}"
+    # if mount point does not exists, write a message to stderr and exit with a non-zero status
+    if [[ ! -d "$argc_mount_point" ]]; then
+        echo "Mount point $argc_mount_point does not exist." >&2
+        exit 1
+    fi
+    # if mount point is not mounted, write a message to stderr and exit with a non-zero status
+    if [[ -z "$(/usr/bin/mount | grep "$argc_mount_point")" ]]; then
+        echo "Mount point $argc_mount_point is not mounted." >&2
+        exit 2
+    fi
+    fusermount -u "$argc_mount_point"
+}
+
+eval "$(argc --argc-eval "$0" "$@")"
