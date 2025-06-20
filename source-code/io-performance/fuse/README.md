@@ -9,4 +9,6 @@ local file system.
 ## What is it?
 
 1. `confuse`: command line utility to create, mount and unmount file system images
-   using FUSE.
+   using FUSE.  This version has a dependency on `argc`.
+1. `confuse.sh`: pure-Bash version of the scriot.
+1. `Makefile`: build script to create the `confuse.sh` script.
