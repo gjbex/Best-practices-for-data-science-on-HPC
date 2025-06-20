@@ -5,6 +5,11 @@ single file, it doesn't contribute to the inode count of the file system quota.
 Moreover, it can be mounted on any directory, so especially on a directory on a
 local file system.
 
+**Note:** This tool uses
+[`argc`](https://github.com/sigoden/argc/blob/main/docs/specification.md#meta)
+to parse command line arguments, define and run subcommands, and generate help
+messages.  If you don't have `argc` installed, you can use the pure-Bash
+version `confuse.sh` instead.
 
 ## What is it?
 
