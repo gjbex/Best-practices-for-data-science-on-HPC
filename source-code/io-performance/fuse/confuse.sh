@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# @meta author Geert Jan Bex <geertjan.bex@uhasselt.be>
+# @meta version 1.0.0
+# @meta require-tools dd,mkfs.ext4,mkfs.ext3,mkfs.ext2,fuse2fs,fusermount,numfmt
+
 # @describe Easily manage file-as-filesystem tool
 # 
 # It can be used to create, mount and unmount a file as
@@ -155,6 +159,7 @@ _argc_run() {
     _argc_len="${#argc__args[@]}"
     _argc_tools=()
     _argc_parse
+    _argc_require_tools "${_argc_tools[@]}"
     if [ -n "${argc__fn:-}" ]; then
         $argc__fn "${argc__positionals[@]}"
     fi
@@ -162,6 +167,8 @@ _argc_run() {
 
 _argc_usage() {
     cat <<-'EOF'
+confuse 1.0.0
+Geert Jan Bex <geertjan.bex@uhasselt.be>
 Easily manage file-as-filesystem tool
 
 It can be used to create, mount and unmount a file as
@@ -178,7 +185,7 @@ EOF
 }
 
 _argc_version() {
-    echo confuse 0.0.0
+    echo confuse 1.0.0
     exit
 }
 
@@ -241,6 +248,7 @@ _argc_parse() {
             ;;
         esac
     done
+    _argc_tools=(dd mkfs.ext4 mkfs.ext3 mkfs.ext2 fuse2fs fusermount numfmt)
     if [[ -n "${_argc_action:-}" ]]; then
         $_argc_action
     else
@@ -322,6 +330,7 @@ _argc_parse_create() {
             ;;
         esac
     done
+    _argc_tools=(dd mkfs.ext4 mkfs.ext3 mkfs.ext2 fuse2fs fusermount numfmt)
     if [[ -n "${_argc_action:-}" ]]; then
         $_argc_action
     else
@@ -405,6 +414,7 @@ _argc_parse_mount() {
             ;;
         esac
     done
+    _argc_tools=(dd mkfs.ext4 mkfs.ext3 mkfs.ext2 fuse2fs fusermount numfmt)
     if [[ -n "${_argc_action:-}" ]]; then
         $_argc_action
     else
@@ -463,6 +473,7 @@ _argc_parse_unmount() {
             ;;
         esac
     done
+    _argc_tools=(dd mkfs.ext4 mkfs.ext3 mkfs.ext2 fuse2fs fusermount numfmt)
     if [[ -n "${_argc_action:-}" ]]; then
         $_argc_action
     else
@@ -611,6 +622,19 @@ _argc_maybe_flag_option() {
         return 1
     fi
     return 0
+}
+
+_argc_require_tools() {
+    local tool missing_tools=()
+    for tool in "$@"; do
+        if ! command -v "$tool" >/dev/null 2>&1; then
+            missing_tools+=("$tool")
+        fi
+    done
+    if [[ "${#missing_tools[@]}" -gt 0 ]]; then
+        echo "error: missing tools: ${missing_tools[*]}" >&2
+        exit 1
+    fi
 }
 
 _argc_die() {

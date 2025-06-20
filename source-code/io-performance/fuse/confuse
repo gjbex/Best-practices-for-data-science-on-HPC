@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# @meta author Geert Jan Bex <geertjan.bex@uhasselt.be>
+# @meta version 1.0.0
+# @meta require-tools dd,mkfs.ext4,mkfs.ext3,mkfs.ext2,fuse2fs,fusermount,numfmt
+
 # @describe Easily manage file-as-filesystem tool
 # 
 # It can be used to create, mount and unmount a file as
