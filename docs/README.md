@@ -58,6 +58,13 @@ on the Bash command line.
 You have experience with R or Python.
 
 
+## Level
+
+* Introductory: 40 %
+* Intermediate: 50 %
+* Advanced: 10 %
+
+
 ## Trainer(s)
 
   * Geert Jan Bex ([geertjan.bex@uhasselt.be](mailto:geertjan.bex@uhasselt.be))
