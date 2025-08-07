@@ -30,9 +30,8 @@ if bootstrap not in ["docker", "localimage"]:
     raise ValueError("Bootstrap method must be either \"docker\" or \"localimage\".")
 
 # If bootstrap is localimage, check that the image file exists
-if bootstrap == "localimage":
-    if not pathlib.Path(image).is_file():
-        raise FileNotFoundError(f"Local image file {image} does not exist.")
+if bootstrap == "localimage" and not pathlib.Path(image).is_file():
+    raise FileNotFoundError(f"Local image file {image} does not exist.")
 
 # Get the labels file name
 labels_filename = USERARG.get("labels_file", "")
@@ -40,6 +39,7 @@ labels_filename = USERARG.get("labels_file", "")
 # If labels file is provided, check that it exists and parse it
 labels = {}
 if labels_filename:
+    Stage0 += comment(text=f"Labels file: {labels_filename}")
     if not pathlib.Path(labels_filename).is_file():
         raise FileNotFoundError(f"Labels file {labels_filename} does not exist.")
     with open(labels_filename, "r") as labels_file:
@@ -91,8 +91,7 @@ Stage0 += runscript(commands=["Rscript"])
 
 # Add labels to the container if provided
 if labels:
-    for key, value in labels.items():
-        Stage0 += label(name=key, value=value)
+    Stage0 += label(metadata=labels)
 '
 
 # handle command line arguments
@@ -261,14 +260,15 @@ if [[ ! -f "$recipe" ]]; then
     exit 1
 fi
 # write the hpccm recipe to the temporary file
-echo "Generating apptainer recipe..."
+echo "Generating apptainer recipe from $apt_list_file, $r_install_script, and $labels_file..."
 hpccm --recipe <(printf '%s' "$hpccm_recipe") \
     --format singularity \
     --userarg apt_list="$apt_list_file" \
-    --userarg r_package_install="$r_install_script" \
-    --userarg labels_file="${labels_file:-}" \
-    --userarg bootstrap="$bootstrap_method" \
-    --userarg baseimage="$base_image" > "$recipe"
+              r_package_install="$r_install_script" \
+              labels_file="$labels_file" \
+              bootstrap="$bootstrap_method" \
+              baseimage="$base_image" \
+    > "$recipe"
 
 # Only when VSC_SCRATCH_NODE is defined do we override Apptainer's tmp dirs;
 # otherwise let Apptainer use its own defaults.
