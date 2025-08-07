@@ -29,10 +29,26 @@ bootstrap = USERARG.get("bootstrap", "docker")
 if bootstrap not in ["docker", "localimage"]:
     raise ValueError("Bootstrap method must be either \"docker\" or \"localimage\".")
 
+# If bootstrap is localimage, check that the image file exists
 if bootstrap == "localimage":
-    # If using a local image, make sure it exists
     if not pathlib.Path(image).is_file():
         raise FileNotFoundError(f"Local image file {image} does not exist.")
+
+# Get the labels file name
+labels_filename = USERARG.get("labels_file", "")
+
+# If labels file is provided, check that it exists
+if labels_filename:
+    if not pathlib.Path(labels_filename).is_file():
+        raise FileNotFoundError(f"Labels file {labels_filename} does not exist.")
+
+# Read labels into a dictionary
+with open(labels_filename, "r") as labels_file:
+    labels = {}
+    for line in labels_file:
+        if line.strip() and not line.startswith("#"):
+            key, value = line.strip().split(" ", 1)
+            labels[key.strip()] = value.strip()
 
 # Choose a base image
 Stage0 += baseimage(image=image, _bootstrap=bootstrap)
@@ -73,6 +89,11 @@ Stage0 += environment(variables={"TZ": "Europe/Brussels"})
 
 # Add runtime script
 Stage0 += runscript(commands=["Rscript"])
+
+# Add labels to the container if provided
+if labels:
+    for key, value in labels.items():
+        Stage0 += label(name=key, value=value)
 '
 
 # handle command line arguments
@@ -80,6 +101,7 @@ Stage0 += runscript(commands=["Rscript"])
 # * --baseimage <image>: name of the base image to use (default: 'ubuntu:22.04')
 # * --apt <package_list_file>: name of the file that contains the list of apt packages to install (optional if bootstrapping from a local image)
 # * --r-install <r-script>: name of the R script that installs R packages (required)
+# * --labels <labels_file>: name of the file that contains the labels to add to the container (optional)
 # * --sif <container_file>: name of the output container file (default: 'r_container.sif')
 # * --help: show a help message and exit
 while [[ $# -gt 0 ]]; do
@@ -116,6 +138,14 @@ while [[ $# -gt 0 ]]; do
             r_install_script="$2"
             shift 2
             ;;
+        --labels)
+            if [[ -z "${2:-}" || "${2:0:1}" == "-" ]]; then
+                echo "Error: Missing value for --labels"
+                exit 1
+            fi
+            labels_file="$2"
+            shift 2
+            ;;
         --sif)
             if [[ -z "${2:-}" || "${2:0:1}" == "-" ]]; then
                 echo "Error: Missing value for --sif"
@@ -145,6 +175,12 @@ done
 # check that the container file is provided and is a valid file name
 if [[ -z "${container_file:-}" ]]; then
     echo "Error: --sif argument is required."
+    exit 1
+fi
+
+# check that the container file doesn't exist, otherwise exit
+if [[ -f "$container_file" ]]; then
+    echo "Error: Container file '$container_file' already exists. Please remove it or specify a different name."
     exit 1
 fi
 
@@ -201,6 +237,12 @@ if [[ ! -f "$r_install_script" ]]; then
     exit 1
 fi
 
+# if the labels file is provided, check that it exists
+if [[ -n "${labels_file:-}" && ! -f "$labels_file" ]]; then
+    echo "Error: Labels file '$labels_file' does not exist."
+    exit 1
+fi
+
 # create a Python venv in a temporary directory, activate and install hpccm
 echo "Creating python environment and install hpccm..."
 venv_dir=$(mktemp -d)
@@ -224,12 +266,13 @@ hpccm --recipe <(printf '%s' "$hpccm_recipe") \
     --format singularity \
     --userarg apt_list="$apt_list_file" \
     --userarg r_package_install="$r_install_script" \
+    --userarg labels_file="${labels_file:-}" \
     --userarg bootstrap="$bootstrap_method" \
     --userarg baseimage="$base_image" > "$recipe"
 
 # Only when VSC_SCRATCH_NODE is defined do we override Apptainer's tmp dirs;
 # otherwise let Apptainer use its own defaults.
-if [[ -n "$VSC_SCRATCH_NODE" ]]; then
+if [[ -n "${VSC_SCRATCH_NODE:-}" ]]; then
     if [[ ! -d "$VSC_SCRATCH_NODE" ]]; then
         echo "Error: VSC_SCRATCH_NODE directory '$VSC_SCRATCH_NODE' does not exist."
         exit 1
@@ -240,7 +283,7 @@ fi
 # Only when VSC_SCRATCH is defined do we override Apptainer's cache dirs;
 # otherwise let Apptainer use its own defaults.
 echo "Using tmp dir: '$APPTAINER_TMPDIR'"
-if [[ -n "$VSC_SCRATCH" ]]; then
+if [[ -n "${VSC_SCRATCH:-}" ]]; then
     if [[ ! -d "$VSC_SCRATCH" ]]; then
         echo "Error: VSC_SCRATCH directory '$VSC_SCRATCH' does not exist."
         exit 1

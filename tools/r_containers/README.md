@@ -12,6 +12,7 @@ Tool to create apptainer images containing R and R packages.
 1. `install_packages.R`: R script that installs the R packages to include in  
    in the image.  it contains some default packages helpful for package installation
    as well as tidyverse and optparse.
+1. `labels.txt`: text files containing labels to be added to the image.
 
 
 ## How to use it?
@@ -56,3 +57,16 @@ the command `install.packages(c("pkg3", "pkg4"))` to install the new R packages
 to include in the new image. The new packages will be added to the existing
 image, and the existing packages will not be removed or updated.
 The original image remains unchanged.
+
+Optionally (but best practice), you can also add labels to the image by using
+the `--labels` option and specifying a text file containing the labels to add.
+The labels will be added to the image metadata. For example:
+
+```bash
+$ sbatch --account=my_credit_account --cluster=my_cluster \
+    create_r_container.slurm \
+        --apt apt_packages.txt \
+        --r-install install_packages.R \
+        --sif my_container.sif \
+        --labels labels.txt
+```
