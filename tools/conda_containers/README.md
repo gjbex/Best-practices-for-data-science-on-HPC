@@ -7,6 +7,8 @@ Tool to create apptainer images containing a conda environment.
 
 1. `create_conda_container.slurm`: Slurm script to create an apptainer
    image with a conda environment.
+1. `environment.yml`: example conda environment file.
+1. `labels.txt`: example labels file for the container.
 
 
 ## How to use it?
