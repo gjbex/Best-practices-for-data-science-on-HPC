@@ -25,3 +25,13 @@ $ sbatch --account=my_credit_account --cluster=my_cluster \
 Here, `environment.yml` is a conda environment file that specifies the
 environment, typically created from an existing conda environment using the
 command:
+
+Optionally (but best practice) you can specify a labels file with the `--labels` option:
+
+```bash
+$ sbatch --account=my_credit_account --cluster=my_cluster \
+    create_conda_container.slurm \
+        --env environment.yml \
+        --sif my_container.sif \
+        --labels labels.txt
+```
