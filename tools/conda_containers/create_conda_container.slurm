@@ -40,12 +40,10 @@ Stage: runtime
     tar xzf /env.tar.gz
     cd /
     rm -rv /env.tar.gz
-    /env/bin/python /env/bin/conda-unpack -q
+    /env/bin/python /env/bin/conda-unpack
 
 %environment
     export PATH=/env/bin/:$PATH
-
-{{ labels }}
 '
 
 # set default value for labels
@@ -72,9 +70,9 @@ while [[ $# -gt 0 ]]; do
                 exit 1
             fi
             if [[ -f "$2" ]]; then
-                labels="
-                %labels
-                $(<"$2")"
+                recipe+="
+%labels
+$(<"$2")"
                 shift 2
             else
                 echo "Error: Labels file '$2' does not exist."
@@ -143,6 +141,5 @@ fi
 apptainer build \
     --fakeroot \
     --build-arg environment_file="$environment_file" \
-    --build-arg labels="$labels" \
     "$container_file" \
     <(printf '%s' "$recipe")
