@@ -18,9 +18,10 @@ Stage: build
 
 %post
     cd /
-    conda install -c conda-forge conda-pack
-    conda env create -n env -f environment.yml
-    conda pack -n env -o env.tar.gz
+    conda update -q -n base -c conda-forge conda -y
+    conda install -q -c conda-forge conda-pack
+    conda env create -q -n env -f environment.yml
+    conda pack -q -n env -o env.tar.gz
 
 BootStrap: docker
 From:  debian:bullseye-slim
@@ -39,14 +40,20 @@ Stage: runtime
     tar xzf /env.tar.gz
     cd /
     rm -rv /env.tar.gz
-    /env/bin/python /env/bin/conda-unpack
+    /env/bin/python /env/bin/conda-unpack -q
 
 %environment
     export PATH=/env/bin/:$PATH
+
+{{ labels }}
 '
+
+# set default value for labels
+labels=''
 
 # handle command line arguments
 # * --env <environment_file>: name of the environment file to use (required)
+# * --labels <label_file>: file containing labels to add to the container (optional)
 # * --sif <container_file>: name of the container file to create (required)
 # * --help: show a help message and exit
 while [[ $# -gt 0 ]]; do
@@ -58,6 +65,21 @@ while [[ $# -gt 0 ]]; do
             fi
             environment_file="$2"
             shift 2
+            ;;
+        --labels)
+            if [[ -z "${2:-}" || "${2:0:1}" == "-" ]]; then
+                echo "Error: Missing value for --labels"
+                exit 1
+            fi
+            if [[ -f "$2" ]]; then
+                labels="
+                %labels
+                $(<"$2")"
+                shift 2
+            else
+                echo "Error: Labels file '$2' does not exist."
+                exit 1
+            fi
             ;;
         --sif)
             if [[ -z "${2:-}" || "${2:0:1}" == "-" ]]; then
@@ -98,7 +120,7 @@ fi
 
 # Only when VSC_SCRATCH_NODE is defined do we override Apptainer's tmp dirs;
 # otherwise let Apptainer use its own defaults.
-if [[ -n "$VSC_SCRATCH_NODE" ]]; then
+if [[ -n "${VSC_SCRATCH_NODE:-}" ]]; then
     if [[ ! -d "$VSC_SCRATCH_NODE" ]]; then
         echo "Error: VSC_SCRATCH_NODE directory '$VSC_SCRATCH_NODE' does not exist."
         exit 1
@@ -108,7 +130,7 @@ if [[ -n "$VSC_SCRATCH_NODE" ]]; then
 fi
 # Only when VSC_SCRATCH is defined do we override Apptainer's cache dirs;
 # otherwise let Apptainer use its own defaults.
-if [[ -n "$VSC_SCRATCH" ]]; then
+if [[ -n "${VSC_SCRATCH:-}" ]]; then
     if [[ ! -d "$VSC_SCRATCH" ]]; then
         echo "Error: VSC_SCRATCH directory '$VSC_SCRATCH' does not exist."
         exit 1
@@ -121,5 +143,6 @@ fi
 apptainer build \
     --fakeroot \
     --build-arg environment_file="$environment_file" \
+    --build-arg labels="$labels" \
     "$container_file" \
     <(printf '%s' "$recipe")
