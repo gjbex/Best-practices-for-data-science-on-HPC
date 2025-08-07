@@ -37,18 +37,17 @@ if bootstrap == "localimage":
 # Get the labels file name
 labels_filename = USERARG.get("labels_file", "")
 
-# If labels file is provided, check that it exists
+# If labels file is provided, check that it exists and parse it
+labels = {}
 if labels_filename:
     if not pathlib.Path(labels_filename).is_file():
         raise FileNotFoundError(f"Labels file {labels_filename} does not exist.")
-
-# Read labels into a dictionary
-with open(labels_filename, "r") as labels_file:
-    labels = {}
-    for line in labels_file:
-        if line.strip() and not line.startswith("#"):
-            key, value = line.strip().split(" ", 1)
-            labels[key.strip()] = value.strip()
+    with open(labels_filename, "r") as labels_file:
+        for line in labels_file:
+            line = line.strip()
+            if line and not line.startswith("#"):
+                key, value = line.split(" ", 1)
+                labels[key.strip()] = value.strip()
 
 # Choose a base image
 Stage0 += baseimage(image=image, _bootstrap=bootstrap)
@@ -161,6 +160,7 @@ while [[ $# -gt 0 ]]; do
             echo "  --baseimage <image>       Name of the base image to use (default: 'ubuntu:22.04')"
             echo "  --apt <package_list_file> Name of the file that contains the list of apt packages to install (optional if bootstrapping from a local image)"
             echo "  --r-install <r_script>    Name of the R script that installs R packages (required)"
+            echo "  --labels <labels_file>    Name of the file that contains labels (optional)"
             echo "  --sif <container_file>    Name of the output container file (required)"
             echo "  --help                    Show this help message and exit"
             exit 0
