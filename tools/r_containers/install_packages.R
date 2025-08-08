@@ -1,0 +1,5 @@
+install.packages('remotes')
+install.packages('devtools')
+install.packages('BiocManager')
+install.packages('optparse')
+install.packages('tidyverse')
