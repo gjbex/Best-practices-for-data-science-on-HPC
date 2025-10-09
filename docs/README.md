@@ -41,7 +41,7 @@ Total duration: 4 hours
 ## Training materials
 
 All training materials are available in a 
-[GitHub repository](https://github.com/hpcleuven/Best-practices-for-data-science-on-HPC).
+[GitHub repository](https://github.com/gjbex/Best-practices-for-data-science-on-HPC).
 
 
 ## Target audience
