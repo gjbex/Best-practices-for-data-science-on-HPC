@@ -15,3 +15,10 @@ using HPC infrastructure efficiently for data science.
 1. `CODE_OF_CONDUCT.md`: code of conduct for the training.
 1. `LICENSE`: license information for the training material.
 1. `CONTRIBUTING.md`: guidelines for contributing to the training material.
+
+
+## Contributors
+
+* [Geert Jan Bex](geertjan.bex@uhasselt.be)
+* [Mariana Montes](mariana.montes@kuleuven.be)
+* [Ehsan Moravveji](ehsan.moravveji@kuleuven.be)
