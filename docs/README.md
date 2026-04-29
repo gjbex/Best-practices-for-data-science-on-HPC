@@ -57,6 +57,8 @@ on the Bash command line.
 
 You have experience with R or Python.
 
+### Software and access requirements
+
 For following along hands-on, you need
 * laptop or desktop with internet access and set up so you can connect to an
   HPC system;
