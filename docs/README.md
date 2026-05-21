@@ -57,6 +57,28 @@ on the Bash command line.
 
 You have experience with R or Python.
 
+
+### Quick self-assessment
+
+If you can do most of the tasks below, you are likely ready for this training.
+
+* log in to an HPC system and navigate the filesystem from a shell;
+* submit a simple batch job and inspect whether it completed successfully;
+* activate or load a software environment for R or Python;
+* run a small R or Python script from the command line;
+* estimate roughly how long a small computation takes on your own machine;
+* recognize when a dataset or intermediate result is large enough to stress
+  memory or storage;
+* explain at a high level why reading many small files can be inefficient;
+* make a small change to an existing script or job script and run it again.
+
+If several of these items still feel difficult, the training will probably move
+too fast. In that case, it is better to first take an introductory HPC session
+and refresh basic command-line use.
+
+
+### Software and access requirements
+
 For following along hands-on, you need
 * laptop or desktop with internet access and set up so you can connect to an
   HPC system;
