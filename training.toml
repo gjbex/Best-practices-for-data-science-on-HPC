@@ -1,0 +1,153 @@
+schema_version = 2
+id = "best-practices-for-data-science-on-hpc"
+title = "Best practices for data science on HPC"
+summary = """
+There are many good reasons to run data science workloads on a High Performance Computing (HPC) system. However, the transition from a laptop to an HPC system can be daunting. This training will help you make that transition. You will also learn about potential pitfalls and how to avoid them. This training is not just about the good parts, but also about how to avoid the bad parts.
+"""
+languages = ["Python", "R"]
+
+[[learning_outcomes]]
+statement = "Be able to judge when to switch to an HPC environment."
+competencies = ["hpc.choose-when-to-use-hpc"]
+
+[[learning_outcomes]]
+statement = "Be able to prepare your environment for R and Python."
+competencies = ["hpc.use-software-environments", "python.activate-software-environment"]
+
+[[learning_outcomes]]
+statement = "Be able to run a job on an HPC cluster that uses that environment."
+competencies = ["hpc.run-jobs-in-software-environments", "slurm.submit-batch-job"]
+
+[[learning_outcomes]]
+statement = "Be able to determine how long your computation will take."
+competencies = ["performance.estimate-runtime-memory-and-efficiency"]
+
+[[learning_outcomes]]
+statement = "Be able to determine how much memory your computation will need."
+competencies = ["performance.estimate-runtime-memory-and-efficiency"]
+
+[[learning_outcomes]]
+statement = "Be able to estimate the efficiency of your computation."
+competencies = ["performance.estimate-runtime-memory-and-efficiency"]
+
+[[learning_outcomes]]
+statement = "Know the basics of how to run your computations efficiently."
+competencies = ["hpc.efficient-computation-basics"]
+
+[[learning_outcomes]]
+statement = "Know when it makes sense to use parallelization."
+competencies = ["performance.choose-when-to-parallelize"]
+
+[[learning_outcomes]]
+statement = "Understand the basics and pitfalls of I/O on HPC systems."
+competencies = ["hpc.io-strategies-and-pitfalls"]
+
+[[learning_outcomes]]
+statement = "Are aware of potential pitfalls and how to avoid them."
+
+[source]
+metadata_document = "docs/README.md"
+repository_url = "https://github.com/gjbex/Best-practices-for-data-science-on-HPC/"
+website_url = "https://gjbex.github.io/Best-practices-for-data-science-on-HPC/"
+license = "CC-BY-4.0"
+
+[delivery]
+duration_minutes = 240
+duration_kind = "fixed"
+session_count = 1
+target_session_duration_minutes = 240
+schedule_complete = true
+description = """
+Total duration: 4 hours
+"""
+
+[audience]
+description = """
+This training is for you if you need to use R or Python for data science on HPC systems.
+"""
+
+[prerequisites]
+summary = """
+This is not a training that starts from scratch. You have followed an HPC introduction training session and you have a basic understanding of how to work on the Bash command line. You have experience with R or Python.
+"""
+competencies = ["hpc.log-in-and-use-shell", "slurm.submit-batch-job", "hpc.use-software-environments", "shell.edit-run-inspect"]
+
+[self_assessment]
+introduction = """
+If you can do most of the tasks below, you are likely ready for this training.
+"""
+tasks = [
+  "Log in to an HPC system and navigate the filesystem from a shell.",
+  "Submit a simple batch job and inspect whether it completed successfully.",
+  "Activate or load a software environment for R or Python.",
+  "Run a small R or Python script from the command line.",
+  "Estimate roughly how long a small computation takes on your own machine.",
+  "Recognize when a dataset or intermediate result is large enough to stress memory or storage.",
+  "Explain at a high level why reading many small files can be inefficient.",
+  "Make a small change to an existing script or job script and run it again."
+]
+
+[requirements]
+software = [
+  "Laptop or desktop with internet access and set up so you can connect to an HPC system.",
+  "An account on an HPC system (e.g., VSC, CECI, ...).",
+  "Compute credits if that is required to run jobs on the HPC system."
+]
+
+[level]
+introductory_percent = 40
+intermediate_percent = 50
+advanced_percent = 10
+
+[[materials]]
+kind = "slides"
+path = "best_practices_for_data_science_on_hpc.pptx"
+
+[[materials]]
+kind = "source-code"
+path = "source-code"
+
+[[materials]]
+kind = "environment"
+path = "environment.yml"
+
+[[trainers]]
+name = "Geert Jan Bex"
+email = "geertjan.bex@uhasselt.be"
+
+[[sessions]]
+id = "session-1"
+title = "Session one"
+duration_minutes = 240
+
+[[sessions.items]]
+subject = "introduction and motivation"
+duration_minutes = 5
+
+[[sessions.items]]
+subject = "setting up environments on an HPC system"
+duration_minutes = 25
+
+[[sessions.items]]
+subject = "walltime & memory requirements"
+duration_minutes = 30
+
+[[sessions.items]]
+subject = "efficiency"
+duration_minutes = 30
+
+[[sessions.items]]
+subject = "to parallelize or not to parallelize?"
+duration_minutes = 30
+
+[[sessions.items]]
+subject = "I/O on HPC systems"
+duration_minutes = 60
+
+[[sessions.items]]
+subject = "pitfalls and how to avoid them"
+duration_minutes = 30
+
+[[sessions.items]]
+subject = "wrap up"
+duration_minutes = 5

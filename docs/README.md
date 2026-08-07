@@ -46,7 +46,7 @@ All training materials are available in a
 
 ## Target audience
 
-This training is for you if you need to use R on HPC systems.
+This training is for you if you need to use R or Python for data science on HPC systems.
 
 
 ## Prerequisites
