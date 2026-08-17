@@ -1,6 +1,7 @@
 schema_version = 2
 id = "best-practices-for-data-science-on-hpc"
 title = "Best practices for data science on HPC"
+content_language = "en"
 summary = """
 There are many good reasons to run data science workloads on a High Performance Computing (HPC) system. However, the transition from a laptop to an HPC system can be daunting. This training will help you make that transition. You will also learn about potential pitfalls and how to avoid them. This training is not just about the good parts, but also about how to avoid the bad parts.
 """
@@ -112,6 +113,10 @@ kind = "environment"
 path = "environment.yml"
 
 [[trainers]]
+name = "Geert Jan Bex"
+email = "geertjan.bex@uhasselt.be"
+
+[[maintainers]]
 name = "Geert Jan Bex"
 email = "geertjan.bex@uhasselt.be"
 
